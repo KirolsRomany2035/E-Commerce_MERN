@@ -7,8 +7,8 @@ const router = express.Router();
 router.get(
   "/", 
   validateJWT, 
-  async (req: express.Request, res: express.Response) => {
-    const userId = (req as any).user._id;
+  async (req: any, res ) => {
+    const userId = req?.user?._id;
     const cart = await getActiveCartForUser({ userId });
     res.status(200).send(cart);
 });
