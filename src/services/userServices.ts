@@ -50,6 +50,6 @@ export const login = async ({email, password}: LoginParams) => {
 }
 
 const generatejwt = (data: any) => {
-    return jwt.sign( data,'KmbhZkhXj2mUxyVXM3hLqJPLtzBcjh2O');
+    return jwt.sign( data,process.env.JWT_SECRET||'');
 } 
  // Register user function 
