@@ -18,18 +18,29 @@ export const seedInitialProducts = async () => {
             
         { title: "Asus Laptop",
          image:
-          "https://cairosales.com/80221-large_default/asus-laptop-gaming-rog-flow-z13-134-wquxga-touch-intel-core-i9-12900h-16gb-ssd-1tb-rtx-3050-4gb-win-11-gz301ze-lc180w.jpg",
-           price: 17000,
-            stock: 20, 
+          "https://r2media.horizondm.com/catalog/product/cache/eb4305db09fb6492bb059b8131f647e3/a/s/asus-gx703hs-kf035t-0.jpg",
+           price: 35000,
+            stock: 15, 
         },
 
             
-        { title: "MsiLaptop",
+        { title: "Msi Laptop",
          image:
           "https://oskran.com/image/cache/catalog/AAA/280781634777960-800x600-800x600.jpg",
            price: 20000,
             stock: 20, 
         },
+
+        { title: "hp Laptop",
+         image:
+          "https://m.media-amazon.com/images/I/51BhXhb%2B8gL._SL500_.jpg",
+           price: 25000,
+            stock: 20, 
+        },
+
+
+
+
 
 
 

@@ -13,11 +13,11 @@ interface Props {
 }
 export default function ProductCart({  title, image, price, }: Props) {
   return (
-    <Card sx={{  margin: 'auto', mt:2, mb: 4, width:330
-, boxShadow: 2, borderRadius: 4, backgroundColor: '#f5f5f5', transition: 'transform 0.2s', '&:hover': { transform:
+    <Card sx={{  margin: 'auto', mt:2, mb: 4, width:264
+, boxShadow:2, borderRadius: 2, backgroundColor: '#f5f5f5', transition: 'transform 0.2s', '&:hover': { transform:
   'scale(1.05)' } }}>
       <CardMedia
-        sx={{ height:345, borderRadius: 4 }}
+        sx={{ height:255, borderRadius: 2, }}
         component ="img"
         src={image}
         image={image}
