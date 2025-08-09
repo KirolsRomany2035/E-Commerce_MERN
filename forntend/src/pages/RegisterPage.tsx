@@ -5,6 +5,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/joy/Button";
 import { useRef, useState } from "react";
 import { BASE_URL } from "../constants/baseUri";
+import { useAuth } from "../context/Auth/AuthContext";
 
 const RegisterPage = () => {
     const [error, setError] = useState("")
@@ -12,11 +13,23 @@ const RegisterPage = () => {
     const lastNameRef = useRef<HTMLInputElement>(null);
     const emailRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
+
+     const {login} = useAuth();
+
+
+
     const onSubmit =async () => {
       const firstName = firstNameRef.current?.value;
       const lastName = lastNameRef.current?.value;
       const email = emailRef.current?.value;
       const password = passwordRef.current?.value;
+
+
+      // Validate the form data
+      if (!firstName || !lastName || !email || !password) {
+        setError('Check submitted data!');
+        return;
+      }
 
       console.log(firstName, lastName, email, password);
 
@@ -36,9 +49,16 @@ const RegisterPage = () => {
             setError("Unable to register user, please try different credientials!");
             return;
         }
-        const data = await response.json();
+        const token = await response.json();
 
-        console.log(data);
+        if (token) {
+            setError("Icorrect token");
+            return;
+        }
+
+        login(email, token);
+
+        console.log(token);
        
          
     }
