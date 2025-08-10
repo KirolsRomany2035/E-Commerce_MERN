@@ -3,7 +3,7 @@ import Container from "@mui/material/Container";
 import ProductCart from "../components/PoroductCard";
 import { useEffect, useState } from "react";
 import type { Product } from "../types/Product";
-import { BASE_URL } from "../constants/baseUri";
+import { BASE_URL } from "../constants/baseUrl";
 import { Box } from "@mui/joy";
 
 const HomePage = () => {
@@ -32,7 +32,7 @@ const HomePage = () => {
     <Container sx={{ mt: 2 }}>
       <Grid container spacing={2} justifyContent="center">
         {products.map((p) => (
-        <Grid  >
+        <Grid key={p.id} >
           <ProductCart {...p}/>
         </Grid>
         ))}

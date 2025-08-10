@@ -4,7 +4,7 @@ import Container from "@mui/joy/Container";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/joy/Button";
 import { useRef, useState } from "react";
-import { BASE_URL } from "../constants/baseUri";
+import { BASE_URL } from "../constants/baseUrl";
 import { useAuth } from "../context/Auth/AuthContext";
 
 const RegisterPage = () => {
@@ -14,54 +14,45 @@ const RegisterPage = () => {
     const emailRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
 
+  
      const {login} = useAuth();
+     
+    async function onSubmit() {
+    const firstName = firstNameRef.current?.value;
+    const lastName = lastNameRef.current?.value;
+    const email = emailRef.current?.value;
+    const password = passwordRef.current?.value;
 
-
-
-    const onSubmit =async () => {
-      const firstName = firstNameRef.current?.value;
-      const lastName = lastNameRef.current?.value;
-      const email = emailRef.current?.value;
-      const password = passwordRef.current?.value;
-
-
-      // Validate the form data
-      if (!firstName || !lastName || !email || !password) {
-        setError('Check submitted data!');
-        return;
-      }
-
-      console.log(firstName, lastName, email, password);
-
-      const response = await fetch(`${BASE_URL}/user/register`, {
-        method: "POST",
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          firstName,
-          lastName,
-          email,
-          password,
-        })
-      });
-        if (!response.ok) {
-            setError("Unable to register user, please try different credientials!");
-            return;
-        }
-        const token = await response.json();
-
-        if (token) {
-            setError("Icorrect token");
-            return;
-        }
-
-        login(email, token);
-
-        console.log(token);
-       
-         
+    if (!firstName || !lastName || !email || !password) {
+      setError("Check submitted data!");
+      return;
     }
+
+
+    const response = await fetch(`${BASE_URL}/user/register`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        firstName,
+        lastName,
+        email,
+        password,
+      })
+    });
+    if (!response.ok) {
+      setError("Unable to register user, please try different credientials!");
+      return;
+    }
+    const token = await response.json();
+    if (!token) {
+      setError("Incorrect token");
+      return;
+    }
+    login(email, token);
+
+  }
     return (
      <Container>
       <Box 
@@ -90,8 +81,14 @@ const RegisterPage = () => {
         <TextField  inputRef={firstNameRef}label="First Name" name="firstName"  />
         <TextField  inputRef={lastNameRef}label="Last Name" name="lastName"  />
         <TextField  inputRef={emailRef}label="Email" name="email"  />
-        <TextField  inputRef={passwordRef} type="Password"label="Password" name="password" />
-        <Button onClick={onSubmit} variant="solid">Register</Button>
+        <TextField  
+        inputRef={passwordRef} 
+        type="Password"
+        label="Password" 
+        name="password" />
+        <Button onClick={onSubmit} variant="solid">
+          Register
+          </Button>
         {error && <Typography sx={{ color: "red" }}>{error}</Typography>}
 
         </Box>

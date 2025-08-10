@@ -3,9 +3,12 @@ import { IOrderItem } from '../models/orderModel';
 import productModel from '../models/productModel';
 import { Types } from 'mongoose';
 import { OrderModel } from "../models/orderModel"
+
+
 interface CreateCartForUser { 
     userId: string; 
 }
+
 const createCartForUser = async ({ userId }: CreateCartForUser) => {
    const cart = await CartModel.create({ userId, totalAmount: 0  });
    await cart.save(); 
@@ -22,6 +25,7 @@ export const getActiveCartForUser = async ({ userId }:GetActiveCartForUser) => {
       cart = await createCartForUser({ userId });
     }
     return cart;
+
 };
 
 interface ClearCart {

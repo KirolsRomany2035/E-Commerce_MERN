@@ -11,8 +11,10 @@ interface AuthContextType {
 export const AuthContext = createContext<AuthContextType>({
     username: null,
     token: null,
-    login: () => {},
+    login: () => {}
 });
 
 
-export const useAuth = () =>  useContext(AuthContext);
+export function useAuth(): AuthContextType {
+    return useContext(AuthContext);
+}
